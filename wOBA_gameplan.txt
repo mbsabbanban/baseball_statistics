@@ -6,6 +6,9 @@ http://dailybaseballdata.com/cgi-bin/getstats.pl
 wOBA is "Weighted On Base Average", this is perhaps the most telling statistic to measure a player's overall offensive contribution per plate appearance
 More info can be found here: (http://en.wikipedia.org/wiki/WOBA)
 
+Formula according to FanGraphs:
+wOBA = (0.691×uBB + 0.722×HBP + 0.884×1B + 1.257×2B + 1.593×3B +2.058×HR) / (AB + BB – IBB + SF + HBP)
+
 But make sure that I always look for yesterday's date
 
 <Objective 1: Getting the data into a database>
