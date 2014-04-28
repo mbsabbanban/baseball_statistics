@@ -8,3 +8,5 @@ For now, this project will focus on tracking stats for the New York Mets (Becaus
 The purpose of this project is to track individual player stats of the Mets, give an overall wOBA for the Mets as a whole, and expand this tool with other useful statistics that would be very good to know. I hope to not only improve my python skills, but also to improve my familiarity with Git/Github and most importantly, further improve my understanding of the wonderful sport known as Baseball.
 
 https://github.com/mbsabbanban/baseball_statistics.git
+
+Hopefully this branch works
