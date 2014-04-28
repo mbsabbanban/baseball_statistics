@@ -1,0 +1,18 @@
+wOBA Gameplan
+
+I'm going to use the following website:
+http://dailybaseballdata.com/cgi-bin/getstats.pl
+
+wOBA is "Weighted On Base Average", this is perhaps the most telling statistic to measure a player's overall offensive contribution per plate appearance
+More info can be found here: (http://en.wikipedia.org/wiki/WOBA)
+
+But make sure that I always look for yesterday's date
+
+<Objective 1: Getting the data into a database>
+
+step 1) Use Python to do a GET of a web page; see what it looks like as a text file
+step 2) I will have to parse the text file and the run calculations to get additional statistics (AVG, SLG, etc.)
+step 3) Turn the data into either a .tsv or a .csv and then insert it into the database
+-----> This is actually quite easy: http://dailybaseballdata.com/cgi-bin/getstats.pl?date=426&out=csv
+
+<Object 2: Query the database>
