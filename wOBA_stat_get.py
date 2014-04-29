@@ -1,10 +1,13 @@
 #!/bin/python/
 
 import urllib.request
+import time
+from datetime import date, timedelta
 
 #Setting up a dynamic url
 
-baseball_url = 'http://dailybaseballdata.com/cgi-bin/getstats.pl?date=426&out=csv'
+yesterday = date.today() - timedelta(1)
+baseball_url = 'http://dailybaseballdata.com/cgi-bin/getstats.pl?date=' + yesterday.strftime(%m%d) + '&out=csv'
 
 #Setting up the GET request to retrieve the HTML markup
 
