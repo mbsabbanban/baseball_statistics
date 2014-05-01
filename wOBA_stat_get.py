@@ -3,10 +3,16 @@
 import urllib.request
 import time
 from datetime import date, timedelta
+from bs4 import BeautifulSoup
+import re
+
+#Global Variables
+yesterday = date.today() - timedelta(1)
+
+#Function for getting raw daily baseball data
 
 #Setting up a dynamic url
 
-yesterday = date.today() - timedelta(1)
 baseball_url = 'http://dailybaseballdata.com/cgi-bin/getstats.pl?date=' + yesterday.strftime("%m%d") + '&out=csv'
 
 print(baseball_url)
@@ -17,16 +23,25 @@ req = urllib.request.Request(baseball_url)
 response = urllib.request.urlopen(req)
 html = response.read()
 
-print(html)
+#Using BeautifulSoup to parse the markup for info, removing script and other unnecessary tags
 
-###Now I need to find some way to parse the markup and write to a text file
+clean_html = BeautifulSoup(html)
+to_extract = clean_html.findAll('script')
 
-#This is where I'm going to parse the markup for the information that I need and then save it to the variable
+for item in to_extract:
+	item.extract()
+
+clean_html = clean_html.get_text()
+clean_html = clean_html.strip() #strip removes all the whitespace
+clean_html = '\n'.join(clean_html.split('\n')[5:]) #Slice at the end removes the first 5 lines and then joining together by '\n'
+
+print(clean_html)
 
 #I am creating a test file and then writing to it using open(),write(),close()
 
-f = open("test.txt", "wb")
-f.write(html)
+f = open("test.txt", "w")
+f.write(clean_html)
 f.close()
 
-#Still need to find some way to get rid of unnecessary HTML, just need the document itself...
+#DATABASE insert should probably be declared in a new function
+#http://stackoverflow.com/questions/10154633/load-csv-data-into-mysql-in-python)
