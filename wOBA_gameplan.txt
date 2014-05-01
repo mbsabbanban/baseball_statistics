@@ -6,16 +6,24 @@ http://dailybaseballdata.com/cgi-bin/getstats.pl
 wOBA is "Weighted On Base Average", this is perhaps the most telling statistic to measure a player's overall offensive contribution per plate appearance
 More info can be found here: (http://en.wikipedia.org/wiki/WOBA)
 
-Formula according to FanGraphs:
+Formula according to FanGraphs (based on 2012 data), subject to change:
 wOBA = (0.691×uBB + 0.722×HBP + 0.884×1B + 1.257×2B + 1.593×3B +2.058×HR) / (AB + BB – IBB + SF + HBP)
 
-But make sure that I always look for yesterday's date
+But make sure that I always look for yesterday's date...
 
-<Objective 1: Getting the data into a database>
+Note that each of the functions could be a separate OBJECTIVE in my script
+
+<Objective 1: Extracting the Raw Data into a neat .CSV file>
 
 step 1) Use Python to do a GET of a web page; see what it looks like as a text file
 step 2) I will have to parse the text file and the run calculations to get additional statistics (AVG, SLG, etc.)
 step 3) Turn the data into either a .tsv or a .csv and then insert it into the database
 -----> This is actually quite easy: http://dailybaseballdata.com/cgi-bin/getstats.pl?date=426&out=csv
 
-<Object 2: Query the database>
+<Objective 2: Setting up the database and the necessary tables>
+
+I'm creating one table that is just the raw data, I'll have to write a MySQL query that has all the statistics that I want to trend and then create a separate report for it...
+
+OR! With the raw data that I collect, I can create a dump of a separate "SABREMETRICS" table and analyze the information there
+
+<Object 3: Create a separate, brand new report [.xlsx] that will give me the trending information that I need>
