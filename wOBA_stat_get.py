@@ -5,6 +5,7 @@ import time
 from datetime import date, timedelta
 from bs4 import BeautifulSoup
 import re
+import pymysql
 
 
 ##### DECLARING GLOBAL VARIABLES #####
@@ -48,10 +49,28 @@ def getBaseballData():
 ##### END OF getBaseballData FUNCTION #####
 
 
-
 #DATABASE insert should probably be declared in a new function
-#http://stackoverflow.com/questions/10154633/load-csv-data-into-mysql-in-python)
+#http://stackoverflow.com/questions/10154633/load-csv-data-into-mysql-in-python
+#https://github.com/PyMySQL/PyMySQL/blob/master/example.py
+
+#Will probably end up using pymysql for my python3 and mysql connector
+
+def pymysqlTest(): #Test function of pymysql just to pull data
+	import pymysql
+	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='baseball_stats')
+	cur = conn.cursor()
+	cur.execute("SELECT * from baseball_stats.raw_baseball_data")
+
+	#print(cur.description)
+	#print()
+
+	for row in cur:
+		print(row)
+		
+	cur.close()
+	conn.close()
 
 ##### RUNNING THE FUNCTIONS TO GENERATE REPORT $$$$$
 
-getBaseballData()
+#getBaseballData()
+pymysqlTest() #
