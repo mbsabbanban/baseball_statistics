@@ -6,6 +6,7 @@ from datetime import date, timedelta
 from bs4 import BeautifulSoup
 import re
 import pymysql
+import csv
 
 
 ##### DECLARING GLOBAL VARIABLES #####
@@ -36,14 +37,18 @@ def getBaseballData():
 
 	clean_html = clean_html.get_text()
 	clean_html = clean_html.strip() #strip removes all the whitespace
-	clean_html = '\n'.join(clean_html.split('\n')[5:]) #Slice at the end removes the first 5 lines and then joining together by '\n'
+	clean_html = '\n'.join(clean_html.split('\n')[6:]) #Slice at the end removes the first 5 lines and then joining together by '\n'
+	clean_html_with_date = clean_html.replace('\n',yesterday.strftime("%y-%m-%d")+'\n')
+	clean_html_with_date = clean_html_with_date + yesterday.strftime("%y-%m-%d")
+	
+	print(clean_html_with_date)
 
-	print(clean_html)
+	#print(clean_html)
 
-	#I am creating a test file and then writing to it using open(),write(),close()
+	#I am creating a test .csv file and then writing to it using open(),write(),close()
 
-	f = open("test.txt", "w")
-	f.write(clean_html)
+	f = open("test.csv", "w")
+	f.write(clean_html_with_date)
 	f.close()
 
 ##### END OF getBaseballData FUNCTION #####
@@ -56,16 +61,19 @@ def getBaseballData():
 #Will probably end up using pymysql for my python3 and mysql connector
 
 def pymysqlTest(): #Test function of pymysql just to pull data
-	import pymysql
 	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='baseball_stats')
 	cur = conn.cursor()
-	cur.execute("SELECT * from baseball_stats.raw_baseball_data")
+	
+	with open('test.csv', 'r') as csvfile:
+		csv_data = csv.reader(csvfile, delimiter='|', quotechar='|')
+		for row in csv_data:
+		#	print(', '.join(row))
+			print(row)
+		#	cur.execute("SELECT * from baseball_stats.raw_baseball_data;")
+			cur.execute('INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE)' 'VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', row)
 
 	#print(cur.description)
 	#print()
-
-	for row in cur:
-		print(row)
 		
 	cur.close()
 	conn.close()
@@ -73,4 +81,4 @@ def pymysqlTest(): #Test function of pymysql just to pull data
 ##### RUNNING THE FUNCTIONS TO GENERATE REPORT $$$$$
 
 #getBaseballData()
-pymysqlTest() #
+pymysqlTest()
