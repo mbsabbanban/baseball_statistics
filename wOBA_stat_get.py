@@ -68,12 +68,21 @@ def pymysqlTest(): #Test function of pymysql just to pull data
 		csv_data = csv.reader(csvfile, delimiter='|', quotechar='|')
 		#print(csv_data)
 		for row in csv_data:
+		
+		#	Should probably try to replace the specific field with a string " + FIELD + "
+		
+			print(row[0])
+			new_row = row[0].split(',')
+			new_row[4] = '"' + new_row[4] + '"'
+		#	print (new_row[4])
+			insert_row = ','.join(new_row)
+		#	print(insert_row)
+		
+		#	Need to adjust the query so that there are quotes around HITTER and POSITION and POSSIBLY DATE
+			
 			insert_query = """
 			INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES (%s)
-			""" % (row[0])
-		
-		#	print(', '.join(row))
-		#	print(row[0])
+			""" % (insert_row)
 			print(insert_query)
 		#	cur.execute("SELECT * from baseball_stats.raw_baseball_data;")
 		#	cur.execute("INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);", row)
@@ -85,7 +94,7 @@ def pymysqlTest(): #Test function of pymysql just to pull data
 	cur.close()
 	conn.close()
 
-##### RUNNING THE FUNCTIONS TO GENERATE REPORT $$$$$
+##### RUNNING THE FUNCTIONS TO GENERATE REPORT #####
 
 #getBaseballData()
 pymysqlTest()
