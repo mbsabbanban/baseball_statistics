@@ -129,7 +129,7 @@ def pymysqlTest(): #Test function of pymysql just to pull data
 		for row in csv_data:
 
 			mlb_id = row[0]
-			name = row[1]
+			name = row[1].replace("'","")
 			team = row[2]
 			game = row[3]
 			game_no = row[4]
