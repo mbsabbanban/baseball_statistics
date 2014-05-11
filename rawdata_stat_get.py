@@ -55,7 +55,7 @@ def getBaseballData():
 
 	#I am creating a test .csv file and then writing to it using open(),write(),close()
 
-	f = open("test.csv", "w")
+	f = open("baseball_rawdata.csv", "w")
 	f.write(clean_html_with_date)
 	f.close()
 
@@ -79,7 +79,7 @@ def pymysqlRawDataInsert():
 	print("Inserting data into the database")
 	
 	
-	with open('test.csv', 'r') as csvfile:
+	with open('baseball_rawdata.csv', 'r') as csvfile:
 		csv_data = csv.reader(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
 		#print(csv_data)
 		#empty_row = [""]
