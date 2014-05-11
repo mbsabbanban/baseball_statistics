@@ -12,13 +12,19 @@ import csv
 ##### DECLARING GLOBAL VARIABLES #####
 yesterday = date.today() - timedelta(1)
 
-#Function for getting raw daily baseball data
+#For doing a data backfill, need to adjust the yesterday date
+#yesterday = date(2014,5,6)
+#print (yesterday.strftime("%m%d"))
+
+
+###### Function for getting raw daily baseball data #####
+
 def getBaseballData():
 
 	#Setting up a dynamic url
 
 	baseball_url = 'http://dailybaseballdata.com/cgi-bin/getstats.pl?date=' + yesterday.strftime("%m%d") + '&out=csv'
-
+	
 	print(baseball_url)
 
 	#Setting up the GET request to retrieve the HTML markup
@@ -56,13 +62,15 @@ def getBaseballData():
 ##### END OF getBaseballData FUNCTION #####
 
 
+##### Function for inserting raw baseball data into mysql database #####
+
 #DATABASE insert should probably be declared in a new function
 #http://stackoverflow.com/questions/10154633/load-csv-data-into-mysql-in-python
 #https://github.com/PyMySQL/PyMySQL/blob/master/example.py
 
 #Will probably end up using pymysql for my python3 and mysql connector
 
-def pymysqlTest(): #Test function of pymysql just to pull data
+def pymysqlRawDataInsert():
 	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='baseball_stats')
 	cur = conn.cursor()
 	
@@ -215,7 +223,9 @@ def pymysqlTest(): #Test function of pymysql just to pull data
 	cur.close()
 	conn.close()
 
+##### END OF pymysqlRawDataInsert FUNCTION #####
+	
 ##### RUNNING THE FUNCTIONS TO GENERATE REPORT #####
 
 getBaseballData()
-pymysqlTest()
+pymysqlRawDataInsert()
