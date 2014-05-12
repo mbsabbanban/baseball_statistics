@@ -10,10 +10,10 @@ import csv
 
 
 ##### DECLARING GLOBAL VARIABLES #####
-yesterday = date.today() - timedelta(1)
+#yesterday = date.today() - timedelta(1)
 
 #For doing a data backfill, need to adjust the yesterday date
-#yesterday = date(2014,5,6)
+yesterday = date(2014,4,30)
 #print (yesterday.strftime("%m%d"))
 
 
@@ -71,7 +71,10 @@ def getBaseballData():
 #Will probably end up using pymysql for my python3 and mysql connector
 
 def pymysqlRawDataInsert():
-	conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='baseball_stats')
+	
+	#localhost connection
+	#conn = pymysql.connect(host='localhost', port=3306, user='root', passwd='password', db='baseball_stats')
+	conn = pymysql.connect(host='69.195.124.91', port=3306, user='mattsabb_bsball', passwd='letsgomets', db='mattsabb_baseball')
 	cur = conn.cursor()
 	
 	z = open("insert.txt", "w")
@@ -196,17 +199,20 @@ def pymysqlRawDataInsert():
 		#	query_string = str(row).strip('[]')
 		#	print(query_string)
 		
-			insert_query = """INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, PICKED_OFF, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, HR_ALLOWED, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');""" % (mlb_id, name, team, game, game_no, result, hitter_pitcher, starter, ab, h, dbl, trp, hr, r, rbi, bb, ibb, hbp, so, sb, cs, picked_off, sh, sf, e, pb, lob, gidp, ip, ha, ra, er, wk, iwk, k, hb, pickoffs, hr_allowed, wp, win, loss, save, bs, hold, position, cg, hit_date)
+		
+		# Localhost Collections
+		
+		#	insert_query = """INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, PICKED_OFF, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, HR_ALLOWED, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');""" % (mlb_id, name, team, game, game_no, result, hitter_pitcher, starter, ab, h, dbl, trp, hr, r, rbi, bb, ibb, hbp, so, sb, cs, picked_off, sh, sf, e, pb, lob, gidp, ip, ha, ra, er, wk, iwk, k, hb, pickoffs, hr_allowed, wp, win, loss, save, bs, hold, position, cg, hit_date)
 			
-		#	insert_query = """INSERT INTO baseball_stats.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, PICKED_OFF, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, HR_ALLOWED, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES (%s, '%s', '%s', '%s', '%s', '%s', '%s', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, '%s', '%s', %s, '%s')""" % (mlb_id, name, team, game, game_no, result, hitter_pitcher, starter, ab, h, dbl, trp, hr, r, rbi, bb, ibb, hbp, so, sb, cs, picked_off, sh, sf, e, pb, lob, gidp, ip, ha, ra, er, wk, iwk, k, hb, pickoffs, hr_allowed, wp, win, loss, save, bs, hold, position, cg, hit_date)
-
+			insert_query = """INSERT INTO mattsabb_baseball.raw_baseball_data (MLB_ID, NAME, TEAM, GAME, GAME_NO, RESULT, HITTER_PITCHER, STARTER, AB, H, 2B, 3B, HR, R, RBI, BB, IBB, HBP, SO, SB, CS, PICKED_OFF, SH, SF, E, PB, LOB, GIDP, IP, HA, RA, ER, WK, IWK, K, HB, PICKOFFS, HR_ALLOWED, WP, WIN, LOSS, SAVE, BS, HOLD, POSITION, CG, HIT_DATE) VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');""" % (mlb_id, name, team, game, game_no, result, hitter_pitcher, starter, ab, h, dbl, trp, hr, r, rbi, bb, ibb, hbp, so, sb, cs, picked_off, sh, sf, e, pb, lob, gidp, ip, ha, ra, er, wk, iwk, k, hb, pickoffs, hr_allowed, wp, win, loss, save, bs, hold, position, cg, hit_date)
+			
 			print (("Writing to db : %s") % insert_query)
 		
 
 		#Executing the SQL statements
 		
 			cur.execute(insert_query)
-		#	cur.execute("SELECT * from baseball_stats.raw_baseball_data;")
+		#	cur.execute("SELECT * from mattsabb_baseball.raw_baseball_data;")
 
 		#Writing results to test file
 		
