@@ -10,10 +10,10 @@ import csv
 
 
 ##### DECLARING GLOBAL VARIABLES #####
-#yesterday = date.today() - timedelta(1)
+yesterday = date.today() - timedelta(1)
 
 #For doing a data backfill, need to adjust the yesterday date
-yesterday = date(2014,4,30)
+#yesterday = date(2014,5,11)
 #print (yesterday.strftime("%m%d"))
 
 
