@@ -1,0 +1,5 @@
+Scheduling Tasks in Powershell
+
+Schtasks /create /tn "Scheduler Test" /sc daily /st 22:35 /tr "PowerShell cat c:\Users\Matt\Documents\GitHub\baseball_statistics\test.txt"
+
+Schtasks /create /tn "Baseball Daily Local Stat Get" /sc daily /st 07:00 /tr "PowerShell python c:\Users\Matt\Documents\GitHub\baseball_statistics\local_rawdata_stat_get.py"
