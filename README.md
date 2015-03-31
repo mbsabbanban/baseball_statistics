@@ -29,3 +29,12 @@ rawdata_stat_get.py (Was working at some point, needs to be QA'd)
 wOBA_stat_get.py (Unfinished)
 
 #####
+
+# Required Libraries
+
+Additional notes for a Windows User
+
+(1) Make sure that you install Python on your Windows machine (I found http://learnpythonthehardway.org/book/ex0.html helpful for setting up) // [Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\Python34", "User")
+(2) You need to download Beautiful Soup 4 package if you don't have it already. If you're using Python 3.4, 'pip' is already included in the package. Just type 'pip install beautifulsoup4' from the shell
+(3) You also need to install pymysql. 'pip install pymysql'
+>>>
