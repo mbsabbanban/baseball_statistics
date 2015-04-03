@@ -1,0 +1,17 @@
+Need to do by the end of the week
+
+(1) QA all the scripts to have an idea of what each piece in the project is doing [done]
+(2) Need to get the rawdata_stat_get.py up and running so MySQL data accessible from anywhere [done]
+*(3) Set-up a cron job so that the local job runs everyday [FINALLY FIGURED IT OUT, RUN AS ADMIN done]
+(4) Need to download the previous 10 years of lahman database and have the data accessible from anywhere
+--> Install Locally [done]
+--> Install on Server, I have the file I just need to put it in the db 
+*(5) Look into having the python scripts run from the server // Desktop Tower
+-> SSH into bluehost server [done]
+-> Set up cronjobs on the Desktop Tower
+
+>>>
+
+Next week tasks
+
+(1) Look into scraping the raw data stats and creating separate tables
